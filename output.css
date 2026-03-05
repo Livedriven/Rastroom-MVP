@@ -3295,6 +3295,16 @@ video {
   border-color: rgb(249 115 22 / var(--tw-border-opacity, 1));
 }
 
+.focus\:border-logo:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 81 227 / var(--tw-border-opacity, 1));
+}
+
+.focus\:border-logo-hover:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(101 135 255 / var(--tw-border-opacity, 1));
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -3315,6 +3325,11 @@ video {
 .focus\:ring-orange-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(249 115 22 / var(--tw-ring-opacity, 1));
+}
+
+.focus\:ring-logo-hover:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(101 135 255 / var(--tw-ring-opacity, 1));
 }
 
 .focus\:hover\:text-center:hover:focus {
