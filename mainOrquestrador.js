@@ -1,8 +1,8 @@
-import { initCadastro } from "./modules/cadastro.js"
+import { initCadastro } from "./js/modules/cadastro.js"
 import { initOperador } from "./modules/operador.js"
 import { initMontagem } from "./modules/montagem.js"
 import { initGestao } from "./modules/gestao.js"
-import { requireAuth } from "./auth.js"
+import { requireAuth } from "./js/auth.js"
 
 const page = location.pathname.split("/").pop()
 
