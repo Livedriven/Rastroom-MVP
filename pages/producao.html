@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastroom | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔨</text></svg>">
+
+</head>
+<body data-page="producao" class="bg-zinc-900 text-zinc-100 min-h-screen font-sans">
+
+    <nav class="bg-zinc-800 border-b border-zinc-700 p-4 sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-4">
+            <h1 class="text-xl md:text-2xl font-bold tracking-tighter text-orange-500 italic text-center w-full xl:w-auto">
+                RASTROOM
+                <!-- RASTROOM <span class="text-white">ROOM</span> -->
+            </h1>
+            
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 justify-center w-full xl:w-auto" id="nav-buttons">
+                <button id="btn-logout" class="p-2 md:px-4 rounded bg-red-500/20 text-red-500 border border-red-500/50 hover:bg-red-500/30 transition text-xs md:text-sm flex items-center justify-center col-span-2 sm:col-span-1">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-6 pb-24">
+
+        <section id="tab-operador" class="tab-content">
+            <div id="scanner-area" class="bg-zinc-800 p-4 md:p-6 rounded-xl border border-zinc-700 text-center shadow-lg">
+                <i class="fas fa-qrcode text-4xl md:text-5xl text-orange-500 mb-4"></i>
+                <h2 class="text-lg md:text-xl font-bold mb-4">Bipar Peça (Lixamento/Pintura)</h2>
+                <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="qrInput" class="w-full bg-zinc-900 border-2 border-orange-500 p-3 md:p-4 rounded text-center text-xl md:text-2xl font-mono focus:ring-4 ring-orange-500/20 outline-none uppercase" placeholder="RD-000-00">
+                    <button id="btn-read-qr" class="w-full sm:w-auto bg-orange-600 py-3 sm:px-8 rounded font-bold hover:bg-orange-500 transition text-lg">LER</button>
+                </div>
+            </div>
+
+            <div id="instrucao-peça" class="hidden mt-6 rounded-xl overflow-hidden border-2 md:border-4 border-zinc-700 shadow-2xl">
+                <div id="cor-fundo-pintura" class="p-4 md:p-8 transition-colors duration-500">
+                    <div class="glass p-4 md:p-6 rounded-lg text-zinc-900 relative">
+                        <div id="alert-retrabalho" class="hidden absolute -top-4 -right-2 md:-right-4 bg-red-600 text-white px-3 md:px-4 py-1 md:py-2 rounded-lg font-black animate-bounce shadow-xl border-2 border-white text-xs md:text-base">RETRABALHO</div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 border-b border-black/10 pb-4">
+                            <div>
+                                <span id="status-badge" class="bg-zinc-900 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block tracking-widest">Aguardando</span>
+                                <h3 id="display-movel" class="text-2xl md:text-4xl font-black uppercase leading-tight">Móvel</h3>
+                                <p id="display-cliente" class="text-xs md:text-sm font-bold opacity-70 italic font-mono mt-1">CLIENTE</p>
+                            </div>
+                            <div class="text-left sm:text-right bg-white/30 sm:bg-transparent p-3 sm:p-0 rounded w-full sm:w-auto">
+                                <p class="text-[10px] md:text-xs opacity-50 uppercase font-bold">Código da Peça</p>
+                                <p id="display-id" class="text-xl md:text-3xl font-mono font-black">RD-000-00</p>
+                                <p id="display-nome-peca" class="text-sm md:text-lg font-bold text-orange-600 uppercase mt-1">NOME DA PEÇA</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 pt-2">
+                            <div class="space-y-4">
+                                <div class="bg-black/5 p-4 rounded-lg flex flex-col justify-center border border-black/5">
+                                    <h4 class="font-bold mb-2 flex items-center text-xs uppercase">
+                                        <i class="fas fa-palette mr-2"></i> Cor / Acabamento
+                                    </h4>
+                                    <div class="flex items-center gap-3">
+                                        <div id="display-cor-visual" class="w-10 h-10 md:w-12 md:h-12 rounded-full shadow-inner border-2 border-white"></div>
+                                        <p id="display-cor-texto" class="font-mono text-base md:text-lg font-bold">#FFFFFF</p>
+                                    </div>
+                                </div>
+                                <div id="detalhes-tecnicos-processo"></div>
+                            </div>
+
+                            <div class="bg-white/40 p-4 md:p-6 rounded-lg border border-black/10 flex flex-col justify-center">
+                                <h4 class="font-bold text-center mb-2 text-xs uppercase">Tempo na Estação</h4>
+                                <div id="cronometro" class="text-4xl sm:text-5xl font-mono font-black text-center py-2 md:py-4 tracking-tighter">00:00:00</div>
+                                <div class="flex flex-col xl:flex-row gap-2 mt-4">
+                                    <button id="btn-start-timer" class="w-full bg-zinc-900 text-white p-3 rounded-lg font-bold hover:bg-black transition text-sm">
+                                        <i class="fas fa-play mr-2"></i>INICIAR
+                                    </button>
+                                    <button id="btn-stop-timer" class="w-full bg-orange-600 text-white p-3 rounded-lg font-bold hover:bg-orange-500 transition shadow-lg text-sm">
+                                        <i class="fas fa-check mr-2"></i>CONCLUIR
+                                    </button>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="error-alert" class="fixed bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 hidden bg-red-600 text-white p-4 md:p-6 rounded-2xl shadow-2xl z-[100] w-[90%] md:w-auto max-w-md flex items-center gap-4 border-2 md:border-4 border-white animate-bounce">
+        <i class="fas fa-hand-paper text-3xl md:text-4xl"></i>
+        <div>
+            <h4 class="font-black text-lg md:text-xl italic uppercase">Atenção!</h4>
+            <p id="error-msg" class="font-bold opacity-90 text-sm md:text-base"></p>
+        </div>
+    </div>
+
+    <script type="module" src="../main.js"></script>
+</body>
+</html>

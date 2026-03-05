@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastroom | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔨</text></svg>">
+
+</head>
+<body data-page="montagem" class="bg-zinc-900 text-zinc-100 min-h-screen font-sans">
+
+    <nav class="bg-zinc-800 border-b border-zinc-700 p-4 sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-4">
+            <h1 class="text-xl md:text-2xl font-bold tracking-tighter text-orange-500 italic text-center w-full xl:w-auto">
+                RASTROOM
+                <!-- RASTROOM <span class="text-white">ROOM</span> -->
+            </h1>
+            
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 justify-center w-full xl:w-auto" id="nav-buttons">
+                <button id="btn-logout" class=" p-2 md:px-4 rounded bg-red-500/20 text-red-500 border border-red-500/50 hover:bg-red-500/30 transition text-xs md:text-sm flex items-center justify-center col-span-2 sm:col-span-1">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-6 pb-24">
+        <section id="tab-montagem" class="tab-content">
+            <div class="bg-zinc-800 p-4 md:p-6 rounded-xl border border-zinc-700 shadow-xl max-w-3xl mx-auto">
+                <div class="text-center mb-6 md:mb-8">
+                    <i class="fas fa-boxes text-4xl md:text-5xl text-blue-500 mb-4"></i>
+                    <h2 class="text-xl md:text-2xl font-bold text-white mb-2">Conferência de Kit</h2>
+                    <p class="text-xs md:text-sm text-zinc-400">Bipe uma peça para verificar o lote completo do móvel.</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3 mb-6 md:mb-8">
+                    <input type="text" id="qrInputMontagem" placeholder="Ex: RD-1234-01" class="w-full bg-zinc-900 border-2 border-blue-500/50 p-3 md:p-4 rounded text-center text-xl md:text-2xl font-mono text-white focus:border-blue-500 outline-none uppercase transition-all">
+                    <button id="btn-verificar-kit" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white py-3 sm:px-8 rounded font-bold transition shadow-lg text-lg">
+                        <i class="fas fa-search mr-2"></i>Verificar
+                    </button>
+                </div>
+
+                <div id="painel-checklist-montagem" class="hidden bg-zinc-900 p-4 md:p-6 rounded-lg border border-zinc-700 shadow-inner">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-zinc-700 pb-4">
+                        <div>
+                            <p class="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-wider mb-1">Móvel a ser montado:</p>
+                            <h3 id="nome-movel-montagem" class="text-lg md:text-xl font-bold text-white leading-tight"></h3>
+                        </div>
+                        <span id="status-kit-badge" class="px-3 py-1 md:px-4 md:py-2 rounded text-xs md:text-sm font-bold shadow-sm w-full md:w-auto text-center"></span>
+                    </div>
+                    
+                    <ul id="lista-pecas-montagem" class="space-y-2 mb-6 md:mb-8 text-xs md:text-sm font-mono max-h-60 overflow-y-auto pr-2"></ul>
+
+                    <button id="btn-concluir-movel" class="w-full bg-green-600 hover:bg-green-500 text-white p-4 rounded-lg font-black text-sm md:text-lg transition shadow-lg hidden">
+                        <i class="fas fa-check-double mr-2"></i> FINALIZAR MONTAGEM
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="error-alert" class="fixed bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 hidden bg-red-600 text-white p-4 md:p-6 rounded-2xl shadow-2xl z-[100] w-[90%] md:w-auto max-w-md flex items-center gap-4 border-2 md:border-4 border-white animate-bounce">
+        <i class="fas fa-hand-paper text-3xl md:text-4xl"></i>
+        <div>
+            <h4 class="font-black text-lg md:text-xl italic uppercase">Atenção!</h4>
+            <p id="error-msg" class="font-bold opacity-90 text-sm md:text-base"></p>
+        </div>
+    </div>
+
+    <script type="module" src="../main.js"></script>
+</body>
+</html>
