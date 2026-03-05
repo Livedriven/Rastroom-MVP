@@ -2,7 +2,8 @@ export const db = {
     usuarios: [
         { email:"ricardoadmin@gmail.com", nome: "Ricardo Admin", role: "admin", senha: "1234" },
         { email:"joaolixador@gmail.com", nome: "João Lixador", role: "producao", senha: "4321" },
-        { email:"anamontagem@gmail.com", nome: "Ana Montagem", role: "montagem", senha: "7890" }
+        { email:"anamontagem@gmail.com", nome: "Ana Montagem", role: "montagem", senha: "7890" },
+        {email:"olivercadastro@gmail.com", nome: "oliver", role: "cadastro", senha: "5423"}
     ],
 
     instrucoesTecnicas: {
