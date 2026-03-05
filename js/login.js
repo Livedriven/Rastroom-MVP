@@ -6,7 +6,7 @@ const inputSenha = document.querySelector("#input-senha")
 function loginValidation({email,senha}){
     const user = API.login({email,senha})
     if(user){
-        window.location.href = "./pages/index.html"
+        window.location.href = "./pages/principal.html"
     }
     else{
         alert("email ou senha esta errado")
@@ -19,4 +19,5 @@ form.addEventListener("submit",(e) => {
     const senha = inputSenha.value
 
     loginValidation({email,senha})
+
 })
