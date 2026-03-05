@@ -1,0 +1,26 @@
+{
+  "name": "rastroom-mvp",
+  "version": "1.0.0",
+  "description": "MVP Rastroom system",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Livedriven/Rastroom-MVP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Livedriven/Rastroom-MVP/issues"
+  },
+  "homepage": "https://github.com/Livedriven/Rastroom-MVP#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
+  },
+  "type": "module"
+}
