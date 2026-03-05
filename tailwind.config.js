@@ -8,6 +8,8 @@ module.exports = {
             colors: {
                 fundo: '#16161a',
                 card: '#dfcdbb',
+                logo:"#3b51e3",
+                "logo-hover": "#6587ff",
                 texto: '#009dfb',
                 detalhe: '#94a1b2',
                 primaria: '#7f5af0',
